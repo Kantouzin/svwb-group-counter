@@ -1,0 +1,32 @@
+[
+  {
+    "value": "diamond",
+    "text": "ダイヤモンド",
+    "promotion": null,
+    "demotion": 11
+  },
+  {
+    "value": "sapphire",
+    "text": "サファイア",
+    "promotion": 13,
+    "demotion": 12
+  },
+  {
+    "value": "ruby",
+    "text": "ルビー",
+    "promotion": 12,
+    "demotion": 13
+  },
+  {
+    "value": "topaz",
+    "text": "トパーズ",
+    "promotion": 11,
+    "demotion": null
+  },
+  {
+    "value": "emerald",
+    "text": "エメラルド",
+    "promotion": null,
+    "demotion": null
+  }
+]
