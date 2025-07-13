@@ -72,6 +72,12 @@
 	function getGroup() {
 		return groupInfos.find((group) => group.value === selectedGroup);
 	}
+
+	let title = $state('SVWB');
+	function setTitle() {
+		const messages = ['ShadoBeyo', 'SeWolYon', 'OwWorN'];
+		title = messages[Math.floor(Math.random() * messages.length)];
+	}
 </script>
 
 <svelte:head>
@@ -80,7 +86,9 @@
 
 <div class="flex min-h-screen flex-col">
 	<header class="bg-black p-4 text-white">
-		<h1 class="text-xl font-bold">SVWB Group Counter</h1>
+		<h1 class="cursor-auto text-xl font-bold" ondblclick={setTitle}>
+			{title} Group Counter
+		</h1>
 	</header>
 
 	<main class="flex-grow">
