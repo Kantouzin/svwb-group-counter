@@ -12,6 +12,11 @@
 	let history: HistoryEntry[] = $state([]);
 
 	onMount(() => {
+		const savedGroup = localStorage.getItem('svwb-group-counter.group') as Group;
+		if (savedGroup) {
+			selectedGroup = savedGroup;
+		}
+
 		const savedHistory = localStorage.getItem('svwb-group-counter.history');
 		if (savedHistory) {
 			try {
@@ -27,6 +32,7 @@
 	});
 
 	function saveHistory() {
+		localStorage.setItem('svwb-group-counter.group', selectedGroup);
 		localStorage.setItem('svwb-group-counter.history', JSON.stringify(history));
 	}
 
