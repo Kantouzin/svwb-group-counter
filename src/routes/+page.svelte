@@ -1,5 +1,6 @@
 <script lang="ts">
 	import groupInfos from '$lib/data/groupInfos.json';
+	import { onMount } from 'svelte';
 
 	interface HistoryEntry {
 		type: 'win' | 'loss';
@@ -9,6 +10,25 @@
 	type Group = 'emerald' | 'topaz' | 'ruby' | 'sapphire' | 'diamond';
 	let selectedGroup: Group = $state('sapphire');
 	let history: HistoryEntry[] = $state([]);
+
+	onMount(() => {
+		const savedHistory = localStorage.getItem('svwb-group-counter.history');
+		if (savedHistory) {
+			try {
+				const parsed = JSON.parse(savedHistory);
+				history = parsed.map((entry: any) => ({
+					...entry,
+					timestamp: new Date(entry.timestamp)
+				}));
+			} catch (e) {
+				console.error('Failed to load history', e);
+			}
+		}
+	});
+
+	function saveHistory() {
+		localStorage.setItem('svwb-group-counter.history', JSON.stringify(history));
+	}
 
 	let wins = $derived(history.filter((entry) => entry.type === 'win').length);
 	let losses = $derived(history.filter((entry) => entry.type === 'loss').length);
@@ -35,15 +55,18 @@
 	function addWin() {
 		const newEntry: HistoryEntry = { type: 'win', timestamp: new Date() };
 		history = [newEntry, ...history].slice(0, 20);
+		saveHistory();
 	}
 
 	function addLoss() {
 		const newEntry: HistoryEntry = { type: 'loss', timestamp: new Date() };
 		history = [newEntry, ...history].slice(0, 20);
+		saveHistory();
 	}
 
 	function resetHistory() {
 		history = [];
+		saveHistory();
 	}
 
 	function getGroup() {
