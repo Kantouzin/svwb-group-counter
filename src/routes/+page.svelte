@@ -86,10 +86,6 @@
 	}
 </script>
 
-<svelte:head>
-	<title>SVWB Group Counter</title>
-</svelte:head>
-
 <div class="flex min-h-screen flex-col">
 	<header class="bg-black p-4 text-white">
 		<h1 class="cursor-auto text-xl font-bold" ondblclick={setTitle}>
